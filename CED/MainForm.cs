@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace CED
         {
             if (ValidateFormData())
             {
+
+                errorProviderConfigSection.Clear();
+                errorProviderCustomProvider.Clear();
+                errorProviderFile.Clear();
+
                 outputTextBox.Text = "";
                 var tempDirectoryName = Guid.NewGuid().ToString();
 
@@ -54,7 +60,7 @@ namespace CED
                 else
                 {
                     startInfo.Arguments =
-                        $"/C {System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory()}\\aspnet_regiis -pd \"{configurationSectionTextBox.Text}\" \".\"";
+                        $"/C {System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory()}\\aspnet_regiis -pdf \"{configurationSectionTextBox.Text}\" \".\"";
                 }
 
                 process.StartInfo = startInfo;
@@ -202,6 +208,34 @@ namespace CED
         private void encryptRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             customProviderTextBox.Enabled = encryptRadioButton.Checked;
+        }
+
+        private void copyPictureBox_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(outputTextBox.Text);
+        }
+
+        private void copyPictureBox_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.copyPictureBox, "Copy");
+        }
+
+        private void documentationLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/Acceleratio/CED");
+        }
+
+        private void configurationSectionTextBox_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.configurationSectionTextBox, "e.g. \"connectionStrings\" or \"system.webServer/Security\".");
+        }
+
+        private void customProviderTextBox_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.customProviderTextBox, "The name of your custom provider, must be referenced from the .config file.");
         }
     }
 }
