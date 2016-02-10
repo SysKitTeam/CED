@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.configFileOpenDialog = new System.Windows.Forms.OpenFileDialog();
             this.fileLabel = new System.Windows.Forms.Label();
@@ -48,9 +49,15 @@
             this.saveToFileRadioButton = new System.Windows.Forms.RadioButton();
             this.runButton = new System.Windows.Forms.Button();
             this.horizontalLabel = new System.Windows.Forms.Label();
-            this.outputTextBox = new System.Windows.Forms.TextBox();
+            this.outputTextBox = new System.Windows.Forms.RichTextBox();
+            this.errorProviderFile = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderConfigSection = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderCustomProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderFile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderConfigSection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCustomProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // configFileOpenDialog
@@ -60,7 +67,7 @@
             // fileLabel
             // 
             this.fileLabel.AutoSize = true;
-            this.fileLabel.Location = new System.Drawing.Point(12, 52);
+            this.fileLabel.Location = new System.Drawing.Point(27, 52);
             this.fileLabel.Name = "fileLabel";
             this.fileLabel.Size = new System.Drawing.Size(26, 13);
             this.fileLabel.TabIndex = 0;
@@ -72,32 +79,33 @@
             this.introLabel.Location = new System.Drawing.Point(0, 0);
             this.introLabel.Name = "introLabel";
             this.introLabel.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.introLabel.Size = new System.Drawing.Size(617, 46);
+            this.introLabel.Size = new System.Drawing.Size(659, 46);
             this.introLabel.TabIndex = 1;
             this.introLabel.Text = resources.GetString("introLabel.Text");
             // 
             // fileTextBox
             // 
-            this.fileTextBox.Location = new System.Drawing.Point(143, 49);
+            this.fileTextBox.Location = new System.Drawing.Point(158, 49);
             this.fileTextBox.Name = "fileTextBox";
             this.fileTextBox.ReadOnly = true;
-            this.fileTextBox.Size = new System.Drawing.Size(380, 20);
+            this.fileTextBox.Size = new System.Drawing.Size(364, 20);
             this.fileTextBox.TabIndex = 2;
             // 
             // attachButton
             // 
-            this.attachButton.Location = new System.Drawing.Point(529, 47);
+            this.attachButton.Location = new System.Drawing.Point(550, 47);
             this.attachButton.Name = "attachButton";
-            this.attachButton.Size = new System.Drawing.Size(75, 23);
+            this.attachButton.Size = new System.Drawing.Size(69, 23);
             this.attachButton.TabIndex = 3;
             this.attachButton.Text = "Attach";
             this.attachButton.UseVisualStyleBackColor = true;
             this.attachButton.Click += new System.EventHandler(this.attachButton_Click);
+            this.attachButton.Validating += new System.ComponentModel.CancelEventHandler(this.attachButton_Validating);
             // 
             // configSectionLabel
             // 
             this.configSectionLabel.AutoSize = true;
-            this.configSectionLabel.Location = new System.Drawing.Point(12, 80);
+            this.configSectionLabel.Location = new System.Drawing.Point(27, 80);
             this.configSectionLabel.Name = "configSectionLabel";
             this.configSectionLabel.Size = new System.Drawing.Size(111, 13);
             this.configSectionLabel.TabIndex = 4;
@@ -105,31 +113,33 @@
             // 
             // configurationSectionTextBox
             // 
-            this.configurationSectionTextBox.Location = new System.Drawing.Point(143, 79);
+            this.configurationSectionTextBox.Location = new System.Drawing.Point(158, 79);
             this.configurationSectionTextBox.Name = "configurationSectionTextBox";
             this.configurationSectionTextBox.Size = new System.Drawing.Size(461, 20);
             this.configurationSectionTextBox.TabIndex = 5;
+            this.configurationSectionTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.configurationSectionTextBox_Validating);
             // 
             // providerLabel
             // 
             this.providerLabel.AutoSize = true;
-            this.providerLabel.Location = new System.Drawing.Point(12, 112);
+            this.providerLabel.Location = new System.Drawing.Point(27, 112);
             this.providerLabel.Name = "providerLabel";
             this.providerLabel.Size = new System.Drawing.Size(49, 13);
             this.providerLabel.TabIndex = 6;
             this.providerLabel.Text = "Provider:";
             // 
-            // providerTextBox
+            // customProviderTextBox
             // 
-            this.customProviderTextBox.Location = new System.Drawing.Point(143, 109);
+            this.customProviderTextBox.Location = new System.Drawing.Point(158, 109);
             this.customProviderTextBox.Name = "customProviderTextBox";
             this.customProviderTextBox.Size = new System.Drawing.Size(461, 20);
             this.customProviderTextBox.TabIndex = 7;
+            this.customProviderTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.customProviderTextBox_Validating);
             // 
             // operationLabel
             // 
             this.operationLabel.AutoSize = true;
-            this.operationLabel.Location = new System.Drawing.Point(12, 140);
+            this.operationLabel.Location = new System.Drawing.Point(27, 140);
             this.operationLabel.Name = "operationLabel";
             this.operationLabel.Size = new System.Drawing.Size(56, 13);
             this.operationLabel.TabIndex = 8;
@@ -138,7 +148,7 @@
             // saveToLabel
             // 
             this.saveToLabel.AutoSize = true;
-            this.saveToLabel.Location = new System.Drawing.Point(12, 172);
+            this.saveToLabel.Location = new System.Drawing.Point(27, 172);
             this.saveToLabel.Name = "saveToLabel";
             this.saveToLabel.Size = new System.Drawing.Size(51, 13);
             this.saveToLabel.TabIndex = 9;
@@ -156,12 +166,13 @@
             this.encryptRadioButton.Text = "Encrypt";
             this.encryptRadioButton.UseMnemonic = false;
             this.encryptRadioButton.UseVisualStyleBackColor = true;
+            this.encryptRadioButton.CheckedChanged += new System.EventHandler(this.encryptRadioButton_CheckedChanged);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.radioButton1);
             this.panel1.Controls.Add(this.encryptRadioButton);
-            this.panel1.Location = new System.Drawing.Point(143, 135);
+            this.panel1.Location = new System.Drawing.Point(158, 135);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(461, 26);
             this.panel1.TabIndex = 11;
@@ -181,7 +192,7 @@
             // 
             this.panel2.Controls.Add(this.outputBoxRadioButton);
             this.panel2.Controls.Add(this.saveToFileRadioButton);
-            this.panel2.Location = new System.Drawing.Point(143, 167);
+            this.panel2.Location = new System.Drawing.Point(158, 167);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(461, 26);
             this.panel2.TabIndex = 12;
@@ -212,7 +223,7 @@
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(143, 200);
+            this.runButton.Location = new System.Drawing.Point(158, 200);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(75, 23);
             this.runButton.TabIndex = 13;
@@ -223,26 +234,38 @@
             // horizontalLabel
             // 
             this.horizontalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.horizontalLabel.Location = new System.Drawing.Point(9, 230);
+            this.horizontalLabel.Location = new System.Drawing.Point(24, 230);
             this.horizontalLabel.Name = "horizontalLabel";
             this.horizontalLabel.Size = new System.Drawing.Size(593, 1);
             this.horizontalLabel.TabIndex = 14;
             // 
             // outputTextBox
             // 
-            this.outputTextBox.Location = new System.Drawing.Point(9, 234);
-            this.outputTextBox.Multiline = true;
+            this.outputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.outputTextBox.Location = new System.Drawing.Point(24, 234);
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
-            this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputTextBox.Size = new System.Drawing.Size(593, 238);
+            this.outputTextBox.Size = new System.Drawing.Size(593, 243);
             this.outputTextBox.TabIndex = 15;
+            this.outputTextBox.Text = "";
+            // 
+            // errorProviderFile
+            // 
+            this.errorProviderFile.ContainerControl = this;
+            // 
+            // errorProviderConfigSection
+            // 
+            this.errorProviderConfigSection.ContainerControl = this;
+            // 
+            // errorProviderCustomProvider
+            // 
+            this.errorProviderCustomProvider.ContainerControl = this;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 481);
+            this.ClientSize = new System.Drawing.Size(659, 481);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.horizontalLabel);
             this.Controls.Add(this.runButton);
@@ -259,16 +282,18 @@
             this.Controls.Add(this.introLabel);
             this.Controls.Add(this.fileLabel);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(633, 520);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(633, 520);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CED - .config Encrypt & Decrypt";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderFile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderConfigSection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCustomProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,7 +320,10 @@
         private System.Windows.Forms.RadioButton saveToFileRadioButton;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label horizontalLabel;
-        private System.Windows.Forms.TextBox outputTextBox;
+        private System.Windows.Forms.RichTextBox outputTextBox;
+        private System.Windows.Forms.ErrorProvider errorProviderFile;
+        private System.Windows.Forms.ErrorProvider errorProviderConfigSection;
+        private System.Windows.Forms.ErrorProvider errorProviderCustomProvider;
     }
 }
 
