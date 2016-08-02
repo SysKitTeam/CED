@@ -11,9 +11,6 @@ Here is what you need to to in order to encrypt your configuration files. We hig
 1. You will be prompted for a password to secure the private key three times. Enter a password of your choice.
 1. Then enter the following command to create the .pfx file. After the –pi switch, enter the password you chose. `pvk2pfx -pvk "YourKeyName.pvk" -spc "YourKeyName.cer" -pfx "YourKeyName.pfx" -pi password-entered-in-previous-step`
 1. You can verify that the certificate has been created by looking in the current directory in the Visual Studio command prompt.
-1. In many cases you will need the thumbprint of the certificate you just provisioned
- * Fire up PowerShell shell and type the following: `Get-ChildItem -path cert:\LocalMachine\My | Where Subject -eq "CN=YourKeyName"`
- * Save the thumbprint value
 1. Make sure you have your certificate, thumbprint and password to the safe place!
 1.  Import the created certificate in .pfx format to the **Local Machine** store in the **My** store name on your machine. To get to the management console:
  * Click Start, type **mmc** in the Search programs and files box, and then press ENTER.
@@ -23,3 +20,6 @@ Here is what you need to to in order to encrypt your configuration files. We hig
  * Click Local computer, and then click Finish.
  * In the Personal store, right click, under “All Tasks”, click Import. Browse to the .pfx file and import the certificate.
  * Enter the password chosen in step 1.
+1. In many cases you will need the thumbprint of the certificate you just provisioned
+ * Fire up PowerShell shell and type the following: `Get-ChildItem -path cert:\LocalMachine\My | Where Subject -eq "CN=YourKeyName"`
+ * Save the thumbprint value
