@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CED.Properties;
+using System.Xml.Linq;
 
 namespace CED
 {
@@ -33,10 +34,11 @@ namespace CED
                 outputTextBox.Text = "";
                 var tempDirectoryName = Guid.NewGuid().ToString();
 
-                var fileName = Path.GetFileName(configFileOpenDialog.FileName);
+                var configFileName = Path.GetFileName(configFileOpenDialog.FileName);
+                var transformFileName = Path.GetFileName(transformFileOpenDialog.FileName);
 
                 Directory.CreateDirectory(tempDirectoryName);
-                File.Copy(configFileOpenDialog.FileName, $"{tempDirectoryName}\\web.config");
+                //File.Copy(configFileOpenDialog.FileName, $"{tempDirectoryName}\\web.config");
 
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -52,6 +54,17 @@ namespace CED
                     customProviderTextBox);
                 Settings.Default.Save();
 
+                var transformedFilePath = Path.GetFullPath($"{tempDirectoryName}\\web.config");
+
+                startInfo.Arguments =
+                    $"/C {Environment.CurrentDirectory}\\ctt.exe \"source: \"{configFileTextBox.Text}\"\" \"transform: \"{transformFileTextBox.Text}\"\" \"destination: \"{transformedFilePath}\"\"";
+
+                process.StartInfo = startInfo;
+                process.Start();
+                process.WaitForExit();
+
+                formatDocument(tempDirectoryName);
+
                 if (encryptRadioButton.Checked)
                 {
                     startInfo.Arguments =
@@ -66,7 +79,7 @@ namespace CED
                 process.StartInfo = startInfo;
                 process.Start();
 
-                string output = process.StandardOutput.ReadToEnd();
+                var output = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
 
                 // this works with English Windows, it might be different for a different localization
@@ -81,7 +94,7 @@ namespace CED
 
                 try
                 {
-                    Directory.Delete(tempDirectoryName, true);
+                    Directory.Delete($"{tempDirectoryName}", true);
                 }
                 catch (Exception)
                 {
@@ -94,15 +107,26 @@ namespace CED
             }
         }
 
-        private void attachButton_Click(object sender, EventArgs e)
+        private void attachConfigButton_Click(object sender, EventArgs e)
         {
             DialogResult result = configFileOpenDialog.ShowDialog(); // Show the dialog.
             if (result == DialogResult.OK) // Test result.
             {
-                fileTextBox.Text = configFileOpenDialog.FileName;
+                configFileTextBox.Text = configFileOpenDialog.FileName;
             }
 
-            ValidateFile();
+            ValidateConfigFile();
+        }
+
+        private void attachButtonTransform_Click(object sender, EventArgs e)
+        {
+            DialogResult result = transformFileOpenDialog.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                transformFileTextBox.Text = transformFileOpenDialog.FileName;
+            }
+
+            ValidateTransformFile();
         }
 
         private StringCollection AddToCollection(StringCollection collection, TextBox textBox)
@@ -177,27 +201,42 @@ namespace CED
         private bool ValidateFormData()
         {
             var customProviderStatus = ValidateCustomProvider();
-            var fileStatus = ValidateFile();
+            var fileStatus = ValidateConfigFile() && ValidateTransformFile();
             var configurationStatus = ValidateConfigurationSection();
 
             return customProviderStatus && fileStatus && configurationStatus;
         }
 
-        private bool ValidateFile()
+        private bool ValidateConfigFile()
         {
-            if (string.IsNullOrEmpty(fileTextBox.Text))
+            if (string.IsNullOrEmpty(configFileTextBox.Text))
             {
-                errorProviderFile.SetError(fileTextBox, "Please select a input file.");
+                errorProviderFile.SetError(configFileTextBox, "Please select a input file.");
                 return false;
             }
 
             return true;
         }
 
-
-        private void attachButton_Validating(object sender, CancelEventArgs e)
+        private bool ValidateTransformFile()
         {
-            ValidateFile();
+            if (string.IsNullOrEmpty(transformFileTextBox.Text))
+            {
+                errorProviderFile.SetError(transformFileTextBox, "Please select a input file.");
+                return false;
+            }
+            return true;
+        }
+
+
+        private void attachButtonConfig_Validating(object sender, CancelEventArgs e)
+        {
+            ValidateConfigFile();
+        }
+
+        private void attachButtonTransform_Validating(object sender, CancelEventArgs e)
+        {
+            ValidateTransformFile();
         }
 
         private void customProviderTextBox_Validating(object sender, CancelEventArgs e)
@@ -212,7 +251,14 @@ namespace CED
 
         private void copyPictureBox_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(outputTextBox.Text);
+            try
+            {
+                Clipboard.SetText(outputTextBox.Text);
+            }
+            catch (System.ArgumentNullException argException)
+            {
+                
+            }
         }
 
         private void copyPictureBox_MouseHover(object sender, EventArgs e)
@@ -236,6 +282,13 @@ namespace CED
         {
             ToolTip tt = new ToolTip();
             tt.SetToolTip(this.customProviderTextBox, "The name of your custom provider, must be referenced from the .config file.");
+        }
+
+        private void formatDocument(string tempDirectoryName)
+        {
+            string data = System.IO.File.ReadAllText($"{tempDirectoryName}\\web.config");
+            var doc = XDocument.Parse(data);
+            doc.Save($"{tempDirectoryName}\\web.config");
         }
     }
 }

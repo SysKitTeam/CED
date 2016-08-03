@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CED_Example.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Country" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Croatia</Value>
+    </Setting>
+    <Setting Name="City" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Zagreb</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
