@@ -1,11 +1,14 @@
 # CED
 CED - .config Encrypt &amp; Decrypt
 
-Use this guide to encrypt and decyrpt your web.config and app.config files using CED and Aspnet_regiis.exe tool.
+Use this tool to encrypt and decyrpt your web.config and app.config files using CED and Aspnet_regiis.exe tool.
 
 ##Encrypting .config files.
 
 Here is what you need to to in order to encrypt your configuration files. We highly recommend you to learn more about [web.config transformations](https://msdn.microsoft.com/en-us/library/dd465318(v=vs.100).aspx) before encrypting your data.
+
+![CED](https://raw.githubusercontent.com/Acceleratio/CED/master/images/CED-intro.png "CED in action!")
+
 
 1. In order to encrypt your files we first need to create an encryption certificate. Run the following commands from a Visual Studio command prompt to create a self-signed certificate in .pfx format. `makecert -r -pe -n "CN=YourKeyName" -sky exchange "YourKeyName.cer" -sv "YourKeyName.pvk"`. 
 1. You will be prompted for a password to secure the private key three times. Enter a password of your choice.
