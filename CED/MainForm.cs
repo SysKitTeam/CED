@@ -44,8 +44,14 @@ namespace CED
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "cmd.exe";
+                
+
                 startInfo.RedirectStandardOutput = true;
+                startInfo.RedirectStandardError = true;
                 startInfo.UseShellExecute = false;
+                startInfo.CreateNoWindow = true;
+
+
                 startInfo.WorkingDirectory = tempDirectoryName;
 
                 Settings.Default.ConfigSectionsHistory = AddToCollection(Settings.Default.ConfigSectionsHistory,
