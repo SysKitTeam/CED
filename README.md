@@ -35,7 +35,8 @@ Here is what you need to to in order to encrypt your configuration files. We hig
     </configProtectedData>
     
     ```
-    This code should be place inside configuration tags of your config file.
+    This code should be place inside configuration tags of your config file. If you are adding provider in your transformation file be sure to add `xdt:Transform="Insert"` in opening `configProtectedData` tag.
+    
     To be able to use custom provider with `Pkcs12ProtectedConfigurationProvider` option you need to add .dll in your Solution. Easiest way to achieve this is by using nuget package manager, fire up nuget in your project, search for `Pkcs12ProtectedConfigurationProvider` and install it. 
     
     Provider package in nuget manager on VS 2015.
