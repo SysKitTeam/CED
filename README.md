@@ -1,7 +1,7 @@
 # CED
 CED - .config Encrypt &amp; Decrypt
 
-Use this tool to encrypt and decyrpt your web.config and app.config or config transformation files using CED, Aspnet_regiis.exe tool and Config Transformation Tool.
+Use this tool to encrypt and decyrpt your web.config and app.config or config transformation files using CED, Aspnet_regiis.exe (used for encrpytion) and [Config Transformation Tool](https://ctt.codeplex.com/).
 
 This tool can work with web.config/app.config or their transformations. You can choose which option you want by checking or unchecking `Use Config Transformation` checkbox on top of program.
 
