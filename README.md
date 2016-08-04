@@ -43,7 +43,7 @@ Provider package in nuget manager on VS 2015.
 
 ![CED](https://raw.githubusercontent.com/Acceleratio/CED/master/images/provider-package.PNG "CED in action!")
 
-#### Screenshots of CED in action.
+## Screenshots of CED in action.
 
 CED with checked option for encrypting/decrypting config transformation.
 
