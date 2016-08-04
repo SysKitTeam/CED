@@ -1,14 +1,13 @@
 # CED
 CED - .config Encrypt &amp; Decrypt
 
-Use this tool to encrypt and decyrpt your web.config and app.config files using CED and Aspnet_regiis.exe tool.
+Use this tool to encrypt and decyrpt your web.config and app.config or config transformation files using CED, Aspnet_regiis.exe tool and Config Transformation Tool.
+
+This tool can work with web.config/app.config or their transformations. You can choose which option you want by checking or unchecking `Use Config Transformation` checkbox on top of program.
 
 ##Encrypting .config files.
 
 Here is what you need to to in order to encrypt your configuration files. We highly recommend you to learn more about [web.config transformations](https://msdn.microsoft.com/en-us/library/dd465318(v=vs.100).aspx) before encrypting your data.
-
-![CED](https://raw.githubusercontent.com/Acceleratio/CED/master/images/CED-intro.png "CED in action!")
-
 
 1. In order to encrypt your files we first need to create an encryption certificate. Run the following commands from a Visual Studio command prompt to create a self-signed certificate in .pfx format. `makecert -r -pe -n "CN=YourKeyName" -sky exchange "YourKeyName.cer" -sv "YourKeyName.pvk"`. 
 1. You will be prompted for a password to secure the private key three times. Enter a password of your choice.
@@ -25,4 +24,26 @@ Here is what you need to to in order to encrypt your configuration files. We hig
  * Enter the password chosen in step 1.
 1. In many cases you will need the thumbprint of the certificate you just provisioned
  * Fire up PowerShell shell and type the following: `Get-ChildItem -path cert:\LocalMachine\My | Where Subject -eq "CN=YourKeyName"`
- * Save the thumbprint value
+ * Save the thumbprint value.
+1. In order to be able to encrypt and decrypt section of config or config transformation file you need to add custom provider to your config or config transformation file. You can add one with the following example code : 
+    ``` xml
+    <configProtectedData>
+      <providers>
+        <add name="YouCustomProviderName" thumbprint="ThumbprintOfYourCustomCertificate" type="Pkcs12ProtectedConfigurationProvider.Pkcs12ProtectedConfigurationProvider, PKCS12ProtectedConfigurationProvider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=34da007ac91f901d" />
+      </providers>
+    </configProtectedData>
+    ```
+This code should be place inside configuration tags of your config file.
+To be able to use custom provider with `Pkcs12ProtectedConfigurationProvider` option you need to add .dll in your Solution. Easiest way to achieve this is by using nuget package manager, fire up nuget in your project, search for `Pkcs12ProtectedConfigurationProvider` and install it. 
+Provider package in nuget manager on VS 2015.
+![CED](https://raw.githubusercontent.com/Acceleratio/CED/master/images/provider-package.PNG "CED in action!")
+
+#### Screenshots of CED in action.
+
+CED with checked option for encrypting/decrypting config transformation.
+
+![CED](https://raw.githubusercontent.com/Acceleratio/CED/master/images/CED-intro.png "CED in action!")
+
+CED with option for encrypting/decrypting web.config/app.config.
+
+![CED](https://raw.githubusercontent.com/Acceleratio/CED/master/images/CED-intro-2.PNG "CED in action!")
