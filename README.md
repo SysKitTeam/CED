@@ -35,13 +35,12 @@ Here is what you need to to in order to encrypt your configuration files. We hig
     </configProtectedData>
     
     ```
+    This code should be place inside configuration tags of your config file.
+    To be able to use custom provider with `Pkcs12ProtectedConfigurationProvider` option you need to add .dll in your Solution. Easiest way to achieve this is by using nuget package manager, fire up nuget in your project, search for `Pkcs12ProtectedConfigurationProvider` and install it. 
     
-This code should be place inside configuration tags of your config file.
-To be able to use custom provider with `Pkcs12ProtectedConfigurationProvider` option you need to add .dll in your Solution. Easiest way to achieve this is by using nuget package manager, fire up nuget in your project, search for `Pkcs12ProtectedConfigurationProvider` and install it. 
-
-Provider package in nuget manager on VS 2015.
-
-![CED](https://raw.githubusercontent.com/Acceleratio/CED/master/images/provider-package.PNG "CED in action!")
+    Provider package in nuget manager on VS 2015.
+    
+    ![CED](https://raw.githubusercontent.com/Acceleratio/CED/master/images/provider-package.PNG "CED in action!")
 
 ## Screenshots of CED in action.
 
