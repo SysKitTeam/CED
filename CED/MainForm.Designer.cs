@@ -63,6 +63,7 @@
             this.transformFileTextBox = new System.Windows.Forms.TextBox();
             this.attachButtonTransform = new System.Windows.Forms.Button();
             this.transformFileOpenDialog = new System.Windows.Forms.OpenFileDialog();
+            this.optionCheckBox = new System.Windows.Forms.CheckBox();
             this.operationPanel.SuspendLayout();
             this.saveToPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderFile)).BeginInit();
@@ -81,7 +82,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.configFileLabel.AutoSize = true;
-            this.configFileLabel.Location = new System.Drawing.Point(27, 52);
+            this.configFileLabel.Location = new System.Drawing.Point(27, 71);
             this.configFileLabel.Name = "configFileLabel";
             this.configFileLabel.Size = new System.Drawing.Size(56, 13);
             this.configFileLabel.TabIndex = 0;
@@ -104,7 +105,7 @@
             this.configFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.configFileTextBox.Location = new System.Drawing.Point(158, 49);
+            this.configFileTextBox.Location = new System.Drawing.Point(158, 68);
             this.configFileTextBox.Name = "configFileTextBox";
             this.configFileTextBox.ReadOnly = true;
             this.configFileTextBox.Size = new System.Drawing.Size(704, 20);
@@ -115,7 +116,7 @@
             this.attachButtonConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.attachButtonConfig.Location = new System.Drawing.Point(894, 49);
+            this.attachButtonConfig.Location = new System.Drawing.Point(894, 66);
             this.attachButtonConfig.Name = "attachButtonConfig";
             this.attachButtonConfig.Size = new System.Drawing.Size(95, 23);
             this.attachButtonConfig.TabIndex = 3;
@@ -130,7 +131,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.configSectionLabel.AutoSize = true;
-            this.configSectionLabel.Location = new System.Drawing.Point(27, 116);
+            this.configSectionLabel.Location = new System.Drawing.Point(27, 135);
             this.configSectionLabel.Name = "configSectionLabel";
             this.configSectionLabel.Size = new System.Drawing.Size(111, 13);
             this.configSectionLabel.TabIndex = 4;
@@ -141,7 +142,7 @@
             this.configurationSectionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.configurationSectionTextBox.Location = new System.Drawing.Point(158, 113);
+            this.configurationSectionTextBox.Location = new System.Drawing.Point(158, 132);
             this.configurationSectionTextBox.Name = "configurationSectionTextBox";
             this.configurationSectionTextBox.Size = new System.Drawing.Size(300, 20);
             this.configurationSectionTextBox.TabIndex = 5;
@@ -154,7 +155,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.providerLabel.AutoSize = true;
-            this.providerLabel.Location = new System.Drawing.Point(491, 116);
+            this.providerLabel.Location = new System.Drawing.Point(491, 135);
             this.providerLabel.Name = "providerLabel";
             this.providerLabel.Size = new System.Drawing.Size(49, 13);
             this.providerLabel.TabIndex = 6;
@@ -165,7 +166,7 @@
             this.customProviderTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.customProviderTextBox.Location = new System.Drawing.Point(562, 113);
+            this.customProviderTextBox.Location = new System.Drawing.Point(562, 132);
             this.customProviderTextBox.Name = "customProviderTextBox";
             this.customProviderTextBox.Size = new System.Drawing.Size(300, 20);
             this.customProviderTextBox.TabIndex = 7;
@@ -178,7 +179,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.operationLabel.AutoSize = true;
-            this.operationLabel.Location = new System.Drawing.Point(27, 151);
+            this.operationLabel.Location = new System.Drawing.Point(27, 170);
             this.operationLabel.Name = "operationLabel";
             this.operationLabel.Size = new System.Drawing.Size(56, 13);
             this.operationLabel.TabIndex = 8;
@@ -190,7 +191,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.saveToLabel.AutoSize = true;
-            this.saveToLabel.Location = new System.Drawing.Point(491, 151);
+            this.saveToLabel.Location = new System.Drawing.Point(491, 170);
             this.saveToLabel.Name = "saveToLabel";
             this.saveToLabel.Size = new System.Drawing.Size(51, 13);
             this.saveToLabel.TabIndex = 9;
@@ -217,7 +218,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.operationPanel.Controls.Add(this.decryptRadioButton);
             this.operationPanel.Controls.Add(this.encryptRadioButton);
-            this.operationPanel.Location = new System.Drawing.Point(158, 146);
+            this.operationPanel.Location = new System.Drawing.Point(158, 165);
             this.operationPanel.Name = "operationPanel";
             this.operationPanel.Size = new System.Drawing.Size(300, 26);
             this.operationPanel.TabIndex = 11;
@@ -240,7 +241,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.saveToPanel.Controls.Add(this.outputBoxRadioButton);
             this.saveToPanel.Controls.Add(this.saveToFileRadioButton);
-            this.saveToPanel.Location = new System.Drawing.Point(562, 146);
+            this.saveToPanel.Location = new System.Drawing.Point(562, 165);
             this.saveToPanel.Name = "saveToPanel";
             this.saveToPanel.Size = new System.Drawing.Size(300, 26);
             this.saveToPanel.TabIndex = 12;
@@ -275,7 +276,7 @@
             this.runButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.runButton.Location = new System.Drawing.Point(158, 178);
+            this.runButton.Location = new System.Drawing.Point(158, 197);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(75, 23);
             this.runButton.TabIndex = 13;
@@ -289,7 +290,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.horizontalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.horizontalLabel.Location = new System.Drawing.Point(32, 207);
+            this.horizontalLabel.Location = new System.Drawing.Point(32, 226);
             this.horizontalLabel.Name = "horizontalLabel";
             this.horizontalLabel.Size = new System.Drawing.Size(957, 2);
             this.horizontalLabel.TabIndex = 14;
@@ -300,10 +301,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.outputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.outputTextBox.Location = new System.Drawing.Point(30, 234);
+            this.outputTextBox.Location = new System.Drawing.Point(30, 250);
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
-            this.outputTextBox.Size = new System.Drawing.Size(959, 441);
+            this.outputTextBox.Size = new System.Drawing.Size(959, 425);
             this.outputTextBox.TabIndex = 15;
             this.outputTextBox.Text = "";
             // 
@@ -325,7 +326,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.copyPictureBox.Image = global::CED.Properties.Resources.Copy;
-            this.copyPictureBox.Location = new System.Drawing.Point(973, 212);
+            this.copyPictureBox.Location = new System.Drawing.Point(973, 231);
             this.copyPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.copyPictureBox.Name = "copyPictureBox";
             this.copyPictureBox.Size = new System.Drawing.Size(16, 16);
@@ -353,7 +354,7 @@
             this.asteriskProviderLabel.AutoSize = true;
             this.asteriskProviderLabel.BackColor = System.Drawing.Color.Transparent;
             this.asteriskProviderLabel.ForeColor = System.Drawing.Color.Red;
-            this.asteriskProviderLabel.Location = new System.Drawing.Point(545, 113);
+            this.asteriskProviderLabel.Location = new System.Drawing.Point(545, 132);
             this.asteriskProviderLabel.Name = "asteriskProviderLabel";
             this.asteriskProviderLabel.Size = new System.Drawing.Size(11, 13);
             this.asteriskProviderLabel.TabIndex = 18;
@@ -367,7 +368,7 @@
             this.asteriskConfSectionLabel.AutoSize = true;
             this.asteriskConfSectionLabel.BackColor = System.Drawing.Color.Transparent;
             this.asteriskConfSectionLabel.ForeColor = System.Drawing.Color.Red;
-            this.asteriskConfSectionLabel.Location = new System.Drawing.Point(141, 113);
+            this.asteriskConfSectionLabel.Location = new System.Drawing.Point(141, 132);
             this.asteriskConfSectionLabel.Name = "asteriskConfSectionLabel";
             this.asteriskConfSectionLabel.Size = new System.Drawing.Size(11, 13);
             this.asteriskConfSectionLabel.TabIndex = 19;
@@ -381,7 +382,7 @@
             this.asteriskConfigLabel.AutoSize = true;
             this.asteriskConfigLabel.BackColor = System.Drawing.Color.Transparent;
             this.asteriskConfigLabel.ForeColor = System.Drawing.Color.Red;
-            this.asteriskConfigLabel.Location = new System.Drawing.Point(89, 49);
+            this.asteriskConfigLabel.Location = new System.Drawing.Point(89, 68);
             this.asteriskConfigLabel.Name = "asteriskConfigLabel";
             this.asteriskConfigLabel.Size = new System.Drawing.Size(11, 13);
             this.asteriskConfigLabel.TabIndex = 20;
@@ -393,7 +394,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 84);
+            this.label1.Location = new System.Drawing.Point(27, 103);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 21;
@@ -407,7 +408,7 @@
             this.asterikTransformLabel.AutoSize = true;
             this.asterikTransformLabel.BackColor = System.Drawing.Color.Transparent;
             this.asterikTransformLabel.ForeColor = System.Drawing.Color.Red;
-            this.asterikTransformLabel.Location = new System.Drawing.Point(106, 81);
+            this.asterikTransformLabel.Location = new System.Drawing.Point(106, 100);
             this.asterikTransformLabel.Name = "asterikTransformLabel";
             this.asterikTransformLabel.Size = new System.Drawing.Size(11, 13);
             this.asterikTransformLabel.TabIndex = 22;
@@ -419,7 +420,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.transformFileTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.transformFileTextBox.Location = new System.Drawing.Point(158, 81);
+            this.transformFileTextBox.Location = new System.Drawing.Point(158, 100);
             this.transformFileTextBox.Name = "transformFileTextBox";
             this.transformFileTextBox.Size = new System.Drawing.Size(704, 20);
             this.transformFileTextBox.TabIndex = 23;
@@ -429,7 +430,7 @@
             this.attachButtonTransform.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.attachButtonTransform.Location = new System.Drawing.Point(894, 79);
+            this.attachButtonTransform.Location = new System.Drawing.Point(894, 98);
             this.attachButtonTransform.Name = "attachButtonTransform";
             this.attachButtonTransform.Size = new System.Drawing.Size(95, 23);
             this.attachButtonTransform.TabIndex = 24;
@@ -438,12 +439,24 @@
             this.attachButtonTransform.Click += new System.EventHandler(this.attachButtonTransform_Click);
             this.attachButtonTransform.Validating += new System.ComponentModel.CancelEventHandler(this.attachButtonTransform_Validating);
             // 
+            // optionCheckBox
+            // 
+            this.optionCheckBox.AutoSize = true;
+            this.optionCheckBox.Location = new System.Drawing.Point(30, 41);
+            this.optionCheckBox.Name = "optionCheckBox";
+            this.optionCheckBox.Size = new System.Drawing.Size(151, 17);
+            this.optionCheckBox.TabIndex = 25;
+            this.optionCheckBox.Text = "Use Config Transformation";
+            this.optionCheckBox.UseVisualStyleBackColor = true;
+            this.optionCheckBox.CheckedChanged += new System.EventHandler(this.optionCheckBox_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1008, 687);
+            this.Controls.Add(this.optionCheckBox);
             this.Controls.Add(this.attachButtonTransform);
             this.Controls.Add(this.transformFileTextBox);
             this.Controls.Add(this.asterikTransformLabel);
@@ -525,6 +538,7 @@
         private System.Windows.Forms.Label asterikTransformLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog transformFileOpenDialog;
+        private System.Windows.Forms.CheckBox optionCheckBox;
     }
 }
 

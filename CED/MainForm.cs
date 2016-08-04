@@ -20,13 +20,13 @@ namespace CED
         public MainForm()
         {
             InitializeComponent();
+            SetupForm();
         }
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            if (ValidateFormData())
+            if (ValidateFormData(optionCheckBox.Checked))
             {
-
                 errorProviderConfigSection.Clear();
                 errorProviderCustomProvider.Clear();
                 errorProviderFile.Clear();
@@ -38,19 +38,16 @@ namespace CED
                 var transformFileName = Path.GetFileName(transformFileOpenDialog.FileName);
 
                 Directory.CreateDirectory(tempDirectoryName);
-                //File.Copy(configFileOpenDialog.FileName, $"{tempDirectoryName}\\web.config");
 
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "cmd.exe";
-                
 
                 startInfo.RedirectStandardOutput = true;
                 startInfo.RedirectStandardError = true;
                 startInfo.UseShellExecute = false;
                 startInfo.CreateNoWindow = true;
-
 
                 startInfo.WorkingDirectory = tempDirectoryName;
 
@@ -60,16 +57,24 @@ namespace CED
                     customProviderTextBox);
                 Settings.Default.Save();
 
-                var transformedFilePath = Path.GetFullPath($"{tempDirectoryName}\\web.config");
+                // Working with config transformations
+                if (optionCheckBox.Checked)
+                {
+                    var transformedFilePath = Path.GetFullPath($"{tempDirectoryName}\\web.config");
 
-                startInfo.Arguments =
-                    $"/C {Environment.CurrentDirectory}\\ctt.exe \"source: \"{configFileTextBox.Text}\"\" \"transform: \"{transformFileTextBox.Text}\"\" \"destination: \"{transformedFilePath}\"\"";
+                    startInfo.Arguments =
+                        $"/C {Environment.CurrentDirectory}\\ctt.exe \"source: \"{configFileTextBox.Text}\"\" \"transform: \"{transformFileTextBox.Text}\"\" \"destination: \"{transformedFilePath}\"\"";
 
-                process.StartInfo = startInfo;
-                process.Start();
-                process.WaitForExit();
+                    process.StartInfo = startInfo;
+                    process.Start();
+                    process.WaitForExit();
 
-                formatDocument(tempDirectoryName);
+                    FormatDocument(tempDirectoryName);
+                }
+                else
+                {
+                    File.Copy(configFileOpenDialog.FileName, $"{tempDirectoryName}\\web.config");   
+                }
 
                 if (encryptRadioButton.Checked)
                 {
@@ -204,13 +209,17 @@ namespace CED
             return true;
         }
 
-        private bool ValidateFormData()
+        private bool ValidateFormData(bool boxChecked)
         {
             var customProviderStatus = ValidateCustomProvider();
-            var fileStatus = ValidateConfigFile() && ValidateTransformFile();
+            var configFileStatus = ValidateConfigFile();
+            if (boxChecked)
+            {
+                configFileStatus &= ValidateTransformFile();
+            }
             var configurationStatus = ValidateConfigurationSection();
 
-            return customProviderStatus && fileStatus && configurationStatus;
+            return customProviderStatus && configFileStatus && configurationStatus;
         }
 
         private bool ValidateConfigFile()
@@ -261,7 +270,7 @@ namespace CED
             {
                 Clipboard.SetText(outputTextBox.Text);
             }
-            catch (System.ArgumentNullException argException)
+            catch (System.ArgumentNullException)
             {
                 
             }
@@ -290,11 +299,22 @@ namespace CED
             tt.SetToolTip(this.customProviderTextBox, "The name of your custom provider, must be referenced from the .config file.");
         }
 
-        private void formatDocument(string tempDirectoryName)
+        private void FormatDocument(string tempDirectoryName)
         {
             string data = System.IO.File.ReadAllText($"{tempDirectoryName}\\web.config");
             var doc = XDocument.Parse(data);
             doc.Save($"{tempDirectoryName}\\web.config");
+        }
+
+        private void optionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SetupForm();
+        }
+
+        private void SetupForm()
+        {
+            transformFileTextBox.Enabled = optionCheckBox.Checked;
+            attachButtonTransform.Enabled = optionCheckBox.Checked;
         }
     }
 }
