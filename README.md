@@ -6,7 +6,7 @@ You can encrypt and decrypt web.config, app.config and config transformation fil
 
 CED can work with web.config and app.config files or their transformations. You can choose which option you want by checking or unchecking the `Use Config Transformation` checkbox at the top of the program.
 
-This tool was developed by [Acceleratio Ltd.](https://acceleratio.net/) and the CED project is licensed under the terms of the MIT license.
+This tool was developed by [SysKit Ltd.](https://www.syskit.com/) and the CED project is licensed under the terms of the MIT license.
 
 ##Encrypting .config files.
 
